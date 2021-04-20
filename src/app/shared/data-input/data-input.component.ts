@@ -133,10 +133,10 @@ export class DataInputComponent implements OnChanges, OnDestroy {
 
   private getWidthOfInput(value: DataValue): number | null {
     if (this.computationNotNecessary()) {
-      return this.configuration.common.minWidth ?? null;
+      return null;
     }
     if (this.constraint?.type === ConstraintType.Boolean) {
-      return Math.max(16, this.configuration.common.minWidth ?? 0);
+      return Math.max(16, this.configuration.common.minWidth || 0);
     }
     if (!this.tempElement) {
       this.tempElement = this.createTempElement();
@@ -150,17 +150,17 @@ export class DataInputComponent implements OnChanges, OnDestroy {
 
     this.tempElement.classList.add('d-none');
 
-    return Math.max(textWidth, this.configuration.common.minWidth ?? 0);
+    return Math.max(textWidth, this.configuration.common.minWidth || 0);
   }
 
   private computationNotNecessary(): boolean {
     const constraintType = this.constraint?.type;
-    return [ConstraintType.Select, ConstraintType.User].includes(constraintType);
+    return [ConstraintType.Select, ConstraintType.User, ConstraintType.Action].includes(constraintType);
   }
 
   private createTempElement(): HTMLElement {
     const tmp = document.createElement('span');
-    tmp.classList.add('invisible', 'white-space-pre');
+    tmp.classList.add('invisible', 'white-space-pre', 'px-1');
     tmp.id = generateCorrelationId();
     return tmp;
   }

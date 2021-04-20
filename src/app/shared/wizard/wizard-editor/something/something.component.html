@@ -9,17 +9,17 @@
       </span>
     </div>
     <data-input *ngIf="dataInputInfo.showDataInput || editedValue"
-      class="wiz-data-input p-0 cursor-pointer d-inline-block"
-      [constraint]="data.attribute?.constraint"
-      [dataValue]="data.dataValue"
-      [focus]="true"
-      [readonly]="!(editing$|async)"
-      [configuration]="configuration | async"
-      [editableInReadonly]="true"
-      (click)="$event.preventDefault(); openEditor(data.attribute)"
-      (valueChange)="onValueChange($event)"
-      (save)="onValueSave($event)"
-      (cancel)="onCancelEditing()">
+                class="wiz-data-input p-0 cursor-pointer d-inline-block"
+                [constraint]="data.attribute?.constraint"
+                [dataValue]="data.dataValue"
+                [focus]="true"
+                [readonly]="!(editing$ | async)"
+                [configuration]="configuration"
+                [editableInReadonly]="true"
+                (click)="$event.preventDefault(); openEditor(data.attribute)"
+                (valueChange)="onValueChange($event)"
+                (save)="onValueSave($event)"
+                (cancel)="onCancelEditing()">
     </data-input>
   </ng-container>
 </ng-container>
