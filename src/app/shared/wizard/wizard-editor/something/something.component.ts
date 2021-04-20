@@ -47,10 +47,10 @@ export class SomethingComponent implements OnChanges {
   public editable: boolean = true;
   public dataValue$: Observable<DataValue>;
 
-  public configuration: BehaviorSubject<DataInputConfiguration> = new BehaviorSubject({
+  public configuration: DataInputConfiguration = {
     common: {inline: true, skipValidation: true, resizeToContent: true, minWidth: 16, allowRichText: true},
     color: {limitWidth: true},
-  });
+  };
 
   constructor() {}
   ngOnChanges(changes: SimpleChanges): void {
@@ -60,14 +60,6 @@ export class SomethingComponent implements OnChanges {
     if (changes.attribute) {
       this.editing$.next(false);
       this.editedValue = null;
-      this.configuration.next({
-        ...this.configuration.value,
-        ...{
-          common: Object.assign({}, this.configuration.value.common, {
-            resizeToContent: this.attribute?.constraint?.type !== ConstraintType.User,
-          }),
-        },
-      });
     }
   }
 
